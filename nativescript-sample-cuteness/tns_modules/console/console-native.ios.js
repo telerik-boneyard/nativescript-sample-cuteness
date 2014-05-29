@@ -1,17 +1,21 @@
-﻿exports.helper_log = function (message) {
-    log('log: ' + message);
+﻿function nslog(prefix, message) {
+    Foundation.NSLog("%@: %@", [{ type: PrimitiveType.POINTER, value: prefix }, { type: PrimitiveType.POINTER, value: message }]);
+}
+
+exports.helper_log = function (message) {
+    nslog('log', message);
 };
 
 exports.info = function (message) {
-    log('info: ' + message);
+    nslog('info', message);
 };
 
 exports.error = function (message) {
-    log('error: ' + message);
+    nslog('error', message);
 };
 
 exports.warn = function (message) {
-    log('warning: ' + message);
+    nslog('warning', message);
 };
 
 exports.timeMillis = function () {

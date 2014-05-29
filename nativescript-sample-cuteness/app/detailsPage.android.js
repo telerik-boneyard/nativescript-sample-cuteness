@@ -116,6 +116,7 @@ activityBody.setupUI = function() {
 	linearLayout.addView(linearLayoutBottom);
 	this.setContentView(relativeLayout);	
 	this.loadPicture(selectedItem, imageView);
+	this.imageView = imageView;
 };
 
 activityBody.loadPicture = function(item, imageView) {
@@ -144,5 +145,11 @@ activityBody.onOptionsItemSelected = function(item){
 	
 	return true;
 };
+
+activityBody.onDestroy = function(){
+	this.super.onDestroy();
+	
+	this.imageView.setImageBitmap(null);
+}
 
 exports.activity = com.tns.NativeScriptActivity.extends(activityBody);

@@ -2,6 +2,7 @@ var helperModule = require("console/console-native");
 
 var Console = (function () {
     function Console() {
+        this.dir = this.dump;
         this._timers = {};
     }
     Console.prototype.sprintf = function (message) {

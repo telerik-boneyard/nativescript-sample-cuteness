@@ -1,73 +1,56 @@
-﻿/**
-* report does such key exist
-*/
-export declare var hasKey: (key: string) => boolean;
+﻿
+declare module "local-settings" {
+    /**
+    * Checks whether such a key exists.
+    * @param key The key to check for.
+    */
+    function hasKey(key: string): boolean;
 
-// getters
+    /**
+    * Gets a value (if existing) for a key as a Boolean Object. A default value can be provided in case there is no existing value.
+    * @param key The key to check for.
+    * @param defaultValue An optional value to be returned in case there is no existing value.
+    */
+    function getBoolean(key: string, defaultValue?: boolean): boolean;
 
-/**
-* gets value of the key as boolean, user can provide default value in case there is no value for the key
-*/
-export declare var getBoolean: (key: string, defaultValue?: boolean) => boolean;
+    /**
+    * Gets a value (if existing) for a key as a String Object. A default value can be provided in case there is no existing value.
+    * @param key The key to check for.
+    * @param defaultValue An optional value to be returned in case there is no existing value.
+    */
+    function getString(key: string, defaultValue?: string): string;
 
-/**
-* gets value of the key as string, user can provide default value in case there is no value for the key
-*/
-export declare var getString: (key: string, defaultValue?: string) => string;
+    /**
+    * Gets a value (if existing) for a key as a Number Object. A default value can be provided in case there is no existing value.
+    * @param key The key to check for.
+    * @param defaultValue An optional value to be returned in case there is no existing value.
+    */
+    function getNumber(key: string, defaultValue?: number): number;
 
-/**
-* gets value of the key as string array, user can provide default value in case there is no value for the key
-*/
-export declare var getStringArray: (key: string, defaultValue?: string[]) => string[];
+    /**
+    * Sets a Boolean Object for a key.
+    * @param key The key.
+    * @param value The value.
+    */
+    function setBoolean(key: string, value: boolean): void;
 
-/**
-* gets value of the key as number (double), user can provide default value in case there is no value for the key
-*/
-export declare var getNumber: (key: string, defaultValue?: number) => number;
+    /**
+    * Sets a String Object for a key.
+    * @param key The key.
+    * @param value The value.
+    */
+    function setString(key: string, value: string): void;
 
-/**
-* gets value of the key as integer, user can provide default value in case there is no value for the key
-*/
-export declare var getInt: (key: string, defaultValue?: number) => number;
+    /**
+    * Sets a Number Object for a key.
+    * @param key The key.
+    * @param value The value.
+    */
+    function setNumber(key: string, value: number): void;
 
-/**
-* gets value of the key as long integer (not fully supported by JS), user can provide default value in case there is no value for the key
-*/
-export declare var getLong: (key: string, defaultValue?: number) => number;
-
-// setters
-
-/**
-* sets value for a key as boolean
-*/
-export declare var setBoolean: (key: string, value: boolean) => void;
-
-/**
-* sets value for a key as string
-*/
-export declare var setString: (key: string, value: string) => void;
-
-/**
-* sets value for a key as string array
-*/
-export declare var setStringArray: (key: string, value: string[]) => void;
-
-/**
-* sets value for a key as JS number (double)
-*/
-export declare var setNumber: (key: string, value: number) => void;
-
-/**
-* sets value for a key as integer
-*/
-export declare var setInt: (key: string, value: number) => void;
-
-/**
-* sets value for a key as long integer
-*/
-export declare var setLong: (key: string, value: number) => void;
-
-/**
-* removes a value for key
-*/
-export declare var remove: (key: string) => void;
+    /**
+    * Removes a value (if existing) for a key.
+    * @param key The key to check for.
+    */
+    function remove(key: string): void;
+}

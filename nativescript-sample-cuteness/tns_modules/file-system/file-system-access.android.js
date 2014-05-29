@@ -1,4 +1,4 @@
-﻿var appModule = require("application/application");
+﻿var appModule = require("application");
 var textModule = require("text/text");
 
 var FileSystemAccess = (function () {

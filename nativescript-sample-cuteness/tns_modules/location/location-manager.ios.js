@@ -3,7 +3,7 @@
 var LocationManager = (function () {
     function LocationManager() {
         this.isStarted = false;
-        this.desiredAccuracy = 3 /* HIGH */;
+        this.desiredAccuracy = 300 /* ANY */;
         this.updateDistance = -1;
         this.iosLocationManager = new CoreLocation.CLLocationManager();
     }

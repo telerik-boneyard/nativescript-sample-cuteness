@@ -1,4 +1,4 @@
-﻿var appModule = require("application/application");
+﻿var appModule = require("application");
 var Common = require("local-settings/local-settings-common");
 
 var sharedPreferences = appModule.android.context.getSharedPreferences("prefs.db", 0);

@@ -1,130 +1,135 @@
-﻿/**
-* The main entry point event. This method is expected to return an instance of the root UI for the application.
-* This will be an Activity extends for Android and a RootViewController for iOS.
-*/
-export declare function onLaunch(): any;
-
-/**
-* This method will be called when the Application is suspended.
-*/
-export declare function onSuspend();
-
-/**
-* This method will be called when the Application is resumed after it has been suspended.
-*/
-export declare function onResume();
-
-/**
-* This method will be called when the Application is about to exit.
-*/
-export declare function onExit();
-
-/**
-* This method will be called when there is low memory on the target device.
-*/
-export declare function onLowMemory();
-
-/**
-* This is the Android-specific application object instance.
-* Encapsulates methods and properties specific to the Android platform.
-* Will be undefined when TargetOS is iOS.
-*/
-export declare var android: AndroidApplication;
-
-/**
-* This is the iOS-specific application object instance.
-* Encapsulates methods and properties specific to the iOS platform.
-* Will be undefined when TargetOS is Android.
-*/
-export declare var ios: iOSApplication;
-
-/**
-* The abstraction of an Android-specific application object.
-*/
-export declare class AndroidApplication {
-    /**
-    * The android.app.Application object instance provided to the init of the module.
-    */
-    public nativeApp: android.app.Application;
+﻿
+declare module "application" {
 
     /**
-    * The application android.content.Context object instance.
+    * The main entry point event. This method is expected to return an instance of the root UI for the application.
+    * This will be an Activity extends for Android and a RootViewController for iOS.
     */
-    public context: android.content.Context;
+    export function onLaunch(): any;
 
     /**
-    * The currently active (loaded) android.app.Activity. This property is automatically updated upon Activity events.
+    * This method will be called when the Application is suspended.
     */
-    public currentActivity: android.app.Activity;
+    export function onSuspend();
 
     /**
-    * The main (start) Activity for the application.
+    * This method will be called when the Application is resumed after it has been suspended.
     */
-    public startActivity: android.app.Activity;
+    export function onResume();
 
     /**
-    * The name of the application package.
+    * This method will be called when the Application is about to exit.
     */
-    public packageName: string;
+    export function onExit();
 
     /**
-    * This method is called by the JavaScript Bridge when navigation to a new activity is triggered.
-    * The return value of this method should be com.tns.NativeScriptActivity.extends implementation.
+    * This method will be called when there is low memory on the target device.
     */
-    public getActivity: (intent: android.content.Intent) => any;
+    export function onLowMemory();
 
     /**
-    * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityCreated method.
+    * This is the Android-specific application object instance.
+    * Encapsulates methods and properties specific to the Android platform.
+    * Will be undefined when TargetOS is iOS.
     */
-    public onActivityCreated: (activity: android.app.Activity, bundle: android.os.Bundle) => void;
+    export var android: AndroidApplication;
 
     /**
-    * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityDestroyed method.
+    * This is the iOS-specific application object instance.
+    * Encapsulates methods and properties specific to the iOS platform.
+    * Will be undefined when TargetOS is Android.
     */
-    public onActivityDestroyed: (activity: android.app.Activity) => void;
+    export var ios: iOSApplication;
 
     /**
-    * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityDestroyed method.
+    * Entry point for the module. Initializes the Application singleton and hooks application lifecycle events.
+    * @param nativeApp The instance of the platform Application object - e.g. android.app.Application
     */
-    public onActivityStarted: (activity: android.app.Activity) => void;
+    export function init(nativeApp: any);
 
     /**
-    * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityPaused method.
+    * The abstraction of an Android-specific application object.
     */
-    public onActivityPaused: (activity: android.app.Activity) => void;
+    interface AndroidApplication {
+        /**
+        * The android.app.Application object instance provided to the init of the module.
+        */
+        nativeApp: android.app.Application;
+
+        /**
+        * The application android.content.Context object instance.
+        */
+        context: android.content.Context;
+
+        /**
+        * The currently active (loaded) android.app.Activity. This property is automatically updated upon Activity events.
+        */
+        currentActivity: android.app.Activity;
+
+        /**
+        * The main (start) Activity for the application.
+        */
+        startActivity: android.app.Activity;
+
+        /**
+        * The name of the application package.
+        */
+        packageName: string;
+
+        /**
+        * This method is called by the JavaScript Bridge when navigation to a new activity is triggered.
+        * The return value of this method should be com.tns.NativeScriptActivity.extends implementation.
+        */
+        getActivity: (intent: android.content.Intent) => any;
+
+        /**
+        * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityCreated method.
+        */
+        onActivityCreated: (activity: android.app.Activity, bundle: android.os.Bundle) => void;
+
+        /**
+        * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityDestroyed method.
+        */
+        onActivityDestroyed: (activity: android.app.Activity) => void;
+
+        /**
+        * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityDestroyed method.
+        */
+        onActivityStarted: (activity: android.app.Activity) => void;
+
+        /**
+        * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityPaused method.
+        */
+        onActivityPaused: (activity: android.app.Activity) => void;
+
+        /**
+        * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityResumed method.
+        */
+        onActivityResumed: (activity: android.app.Activity) => void;
+
+        /**
+        * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityStopped method.
+        */
+        onActivityStopped: (activity: android.app.Activity) => void;
+
+        /**
+        * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onSaveActivityState method.
+        */
+        onSaveActivityState: (activity: android.app.Activity, bundle: android.os.Bundle) => void;
+    }
 
     /**
-    * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityResumed method.
+    * The abstraction of an iOS-specific application object.
     */
-    public onActivityResumed: (activity: android.app.Activity) => void;
+    interface iOSApplication {
+        /**
+        * The root view controller for the application.
+        */
+        rootController: UIKit.UIViewController;
 
-    /**
-    * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onActivityStopped method.
-    */
-    public onActivityStopped: (activity: android.app.Activity) => void;
-
-    /**
-    * Direct handler of the android.app.Application.ActivityLifecycleCallbacks.onSaveActivityState method.
-    */
-    public onSaveActivityState: (activity: android.app.Activity, bundle: android.os.Bundle) => void;
+        /**
+        * The android.app.Application object instance provided to the init of the module.
+        */
+        nativeApp: UIKit.UIApplication;
+    }
 }
-
-/**
-* The abstraction of an iOS-specific application object.
-*/
-export declare class iOSApplication {
-    /**
-    * The root view controller for the application.
-    */
-    public rootController: UIKit.UIViewController;
-
-    /**
-    * The android.app.Application object instance provided to the init of the module.
-    */
-    public nativeApp: UIKit.UIApplication;
-}
-
-/**
-* Entry point for the module. Initializes the Application singleton and hooks application lifecycle events.
-*/
-export declare function init(nativeApp: any);

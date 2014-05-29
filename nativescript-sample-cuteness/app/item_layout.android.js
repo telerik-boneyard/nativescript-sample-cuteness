@@ -24,11 +24,13 @@ var item = (function () {
 		var that = this;		
 		var onClickListener = new android.view.View.OnClickListener({
 			onClick: function(view) {
-				appModel.selectedItem = that.item2;
-				var currentActivity = app.android.currentActivity;				
-				var intent = new android.content.Intent(currentActivity, com.tns.NativeScriptActivity.class);
-				intent.putExtra("details_activity", 0);
-				currentActivity.startActivity(intent);
+			    if (that.item2) {
+    				appModel.selectedItem = that.item2;
+                    var currentActivity = app.android.currentActivity;				
+				    var intent = new android.content.Intent(currentActivity, com.tns.NativeScriptActivity.class);
+				    intent.putExtra("details_activity", 0);
+				    currentActivity.startActivity(intent);
+				}
 			}
 		});		
 		imageView.setOnClickListener(onClickListener);

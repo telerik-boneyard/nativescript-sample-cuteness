@@ -5,7 +5,7 @@
     d.prototype = new __();
 };
 var file_access_module = require("file-system/file-system-access");
-var promises = require("promises/promises");
+var promises = require("promises");
 
 var fileAccess;
 var getFileAccess = function () {

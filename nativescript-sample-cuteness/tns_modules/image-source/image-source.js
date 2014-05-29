@@ -1,7 +1,7 @@
-﻿var app = require("application/application");
+﻿var app = require("application");
 var native = require("image-source/image-source-native");
 
-var http = require("http/http");
+var http = require("http");
 
 (function (ImageFormat) {
     ImageFormat[ImageFormat["PNG"] = 0] = "PNG";
@@ -120,4 +120,4 @@ function fromUrl(url) {
     return http.getImage(url);
 }
 exports.fromUrl = fromUrl;
-//# sourceMappingURL=image-source.js.map
+//# sourceMappingURL=image-source.impl.js.map

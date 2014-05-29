@@ -1,5 +1,10 @@
-﻿var promises = require("promises/promises");
-var imageSource = require("image-source/image-source");
+﻿var promises = require("promises");
+var imageSource = require("image-source");
+var types = require("camera/camera-types");
+
+var merger = require("utils/module-merge");
+
+merger.merge(types, exports);
 
 var imagePickerController;
 
@@ -40,17 +45,13 @@ exports.takePicture = function (options) {
         protocol: "UIImagePickerControllerDelegate",
         implementation: {
             imagePickerControllerDidFinishPickingMediaWithInfo: function (picker, info) {
-                console.log('takeImage received');
                 picker.presentingViewController.dismissViewControllerAnimatedCompletion(true, null);
-
                 listener = null;
                 var image = imageSource.fromNativeSource(info.valueForKey(UIKit.UIImagePickerControllerOriginalImage));
                 d.resolve(image);
             },
             imagePickerControllerDidCancel: function (picker) {
-                console.info('takeImage canceled');
                 picker.presentingViewController.dismissViewControllerAnimatedCompletion(true, null);
-
                 listener = null;
                 d.reject(new Error('takePicture canceled by user'));
             }
@@ -63,6 +64,18 @@ exports.takePicture = function (options) {
     imagePickerController.mediaTypes = UIKit.UIImagePickerController.availableMediaTypesForSourceType(1 /* UIImagePickerControllerSourceTypeCamera */);
     imagePickerController.sourceType = 1 /* UIImagePickerControllerSourceTypeCamera */;
     imagePickerController.modalPresentationStyle = 3 /* UIModalPresentationCurrentContext */;
+
+    if (options && ("undefined" !== typeof options.cameraPosition) && (1 /* FRONT */ === options.cameraPosition)) {
+        imagePickerController.cameraDevice = 1 /* UIImagePickerControllerCameraDeviceFront */;
+    }
+
+    if (options && ("undefined" !== typeof options.flashMode)) {
+        if (-1 /* OFF */ === options.flashMode) {
+            imagePickerController.cameraFlashMode = -1 /* UIImagePickerControllerCameraFlashModeOff */;
+        } else if (1 /* ON */ === options.flashMode) {
+            imagePickerController.cameraFlashMode = 1 /* UIImagePickerControllerCameraFlashModeOn */;
+        }
+    }
 
     topViewController().presentViewControllerAnimatedCompletion(imagePickerController, true, null);
 

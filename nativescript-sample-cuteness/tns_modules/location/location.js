@@ -1,9 +1,12 @@
-﻿var promises = require("promises/promises");
+﻿var promises = require("promises");
 var timer = require("timer/timer");
 var types = require("location/location-types");
 var locationManagerModule = require("location/location-manager");
 
-require("utils/module-merge").merge(types, exports);
+var merger = require("utils/module-merge");
+
+merger.merge(types, exports);
+merger.merge(locationManagerModule, exports);
 
 exports.getLocation = function (options) {
     var d = promises.defer();
@@ -63,35 +66,4 @@ exports.getLocation = function (options) {
 
     return d.promise();
 };
-
-var LocationManager = (function () {
-    function LocationManager() {
-        this.nativeManager = new locationManagerModule.LocationManager();
-    }
-    LocationManager.isEnabled = function () {
-        return locationManagerModule.LocationManager.isEnabled();
-    };
-
-    LocationManager.distance = function (loc1, loc2) {
-        return locationManagerModule.LocationManager.distance(loc1, loc2);
-    };
-
-    LocationManager.prototype.startLocationMonitoring = function (onLocation, onError, options) {
-        this.nativeManager.startLocationMonitoring(onLocation, onError, options);
-    };
-
-    LocationManager.prototype.stopLocationMonitoring = function () {
-        this.nativeManager.stopLocationMonitoring();
-    };
-
-    Object.defineProperty(LocationManager.prototype, "lastKnownLocation", {
-        get: function () {
-            return this.nativeManager.lastKnownLocation;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return LocationManager;
-})();
-exports.LocationManager = LocationManager;
 //# sourceMappingURL=location.impl.js.map

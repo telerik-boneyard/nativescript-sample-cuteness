@@ -4,7 +4,9 @@ var activityBody = (function(){
 			this.super.onCreate(bundle);
 		    
 		    // This function is not defined here, inheritors will define it
-		    this.setupUI();
+			if(this.setupUI){
+				this.setupUI();
+			}
 		    
 		    if(this.setupActionBar){
 		    	this.setupActionBar();

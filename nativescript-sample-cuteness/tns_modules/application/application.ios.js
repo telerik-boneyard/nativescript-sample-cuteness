@@ -17,9 +17,10 @@ exports.init = function (nativeApp) {
 
 var iOSApplication = (function () {
     function iOSApplication(nativeApp) {
-        this.nativeApp = nativeApp;
+        this.nativeApp = UIKit.UIApplication.sharedApplication();
     }
     iOSApplication.prototype.init = function () {
+        var that = this;
         UIKit.UIResponder.extends({}, {
             name: "TNSAppDelegate"
         }).implements({
@@ -33,7 +34,8 @@ var iOSApplication = (function () {
                     this.window.makeKeyAndVisible();
 
                     if (exports.onLaunch) {
-                        this.window.rootViewController = exports.onLaunch();
+                        that.rootController = exports.onLaunch();
+                        this.window.rootViewController = that.rootController;
                     } else {
                         log("Missing Application.onLaunch");
                     }

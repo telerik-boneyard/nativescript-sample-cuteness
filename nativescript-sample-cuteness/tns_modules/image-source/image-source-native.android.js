@@ -1,4 +1,4 @@
-﻿var appModule = require("application/application");
+﻿var appModule = require("application");
 
 exports.fromResource = function (name) {
     var androidApp = appModule.android;

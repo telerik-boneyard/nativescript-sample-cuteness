@@ -6,6 +6,7 @@ var callbacks = android.app.Application.ActivityLifecycleCallbacks;
 
 var initEvents = function () {
     var androidApp = exports.android;
+
     var lifecycleCallbacks = new callbacks({
         onActivityCreated: function (activity, bundle) {
             if (!androidApp.startActivity) {
@@ -21,16 +22,34 @@ var initEvents = function () {
                 androidApp.currentActivity = undefined;
             }
 
+            if (activity === androidApp.startActivity) {
+                if (exports.onExit) {
+                    exports.onExit();
+                }
+            }
+
             if (androidApp.onActivityDestroyed) {
                 androidApp.onActivityDestroyed(activity);
             }
         },
         onActivityPaused: function (activity) {
+            if (activity === androidApp.currentActivity) {
+                if (exports.onSuspend) {
+                    exports.onSuspend();
+                }
+            }
+
             if (androidApp.onActivityPaused) {
                 androidApp.onActivityPaused(activity);
             }
         },
         onActivityResumed: function (activity) {
+            if (activity === androidApp.currentActivity) {
+                if (exports.onResume) {
+                    exports.onResume();
+                }
+            }
+
             if (androidApp.onActivityResumed) {
                 androidApp.onActivityResumed(activity);
             }
