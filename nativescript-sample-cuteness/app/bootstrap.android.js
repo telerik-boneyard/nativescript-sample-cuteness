@@ -35,7 +35,7 @@ var __extends = function(Child, Parent) {
 		
 		Parent.apply = function(thiz, args) {
 			var Extended = extend(thiz.__proto__.__child, thiz.__proto__.__parent);
-			if (args && args.length > 1)
+			if (args && args.length > 0)
 			{
 				thiz.__proto__ = new (Function.prototype.bind.apply(Extended, [null].concat(args)));
 			}
@@ -70,5 +70,5 @@ app.init({
 	onCreate: function() {
 		appModule.init(this);
 		require("main");
-	} 
+	}
 });

@@ -31,6 +31,8 @@ var initEvents = function () {
             if (androidApp.onActivityDestroyed) {
                 androidApp.onActivityDestroyed(activity);
             }
+
+            gc();
         },
         onActivityPaused: function (activity) {
             if (activity === androidApp.currentActivity) {
