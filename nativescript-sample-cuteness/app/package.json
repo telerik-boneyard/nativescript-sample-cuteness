@@ -1,0 +1,6 @@
+{
+	"name": "tns-samples-cuteness.io",
+	"main": "app.js",
+	"version": "0.9.0",
+	"description": "Nativescript cuteness.io sample application"
+}
